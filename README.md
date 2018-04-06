@@ -18,22 +18,23 @@ the wind speed is 0.
 
 - Value is an integer, the sign of the wind speed value indicates the wind direction.
 
-**Step 1: Input data**
+**Input data**
 
 - Data is being generated automatically (a few times a minute) in a project directory
 - This stream of data provides data for 1000x1000 items (exhaustively)
 
-**Step 2: Online processing**
+**Step 1: Online processing (online_processing.py)**
 
-- We compute the wind speed variability in the last two minutes of the (sliding) window by computing for each coordinate (x,y) the MAX and MIN values in that
-window
+- We compute the wind speed variability in the last two minutes of the (sliding) window by computing for each coordinate (x,y) the MAX and MIN values in that window. We use a window length of 120 seconds, and a sliding window of 20 seconds. 
 - Save the result of algorithm for each window in HDFS
 - Store the variability of wind speed (i.e., MAX – MIN) for each coordinate, for each
-window in HDFS.
+window in HDFS in a large file
 
-**Step 3: Batch processing**
+**Step 2: Batch processing (batch_processing.py)**
 
-- We execute a MapReduce code when needed.
-- Process the data in the output file in HDFS from Step 2
-- An output file should contain that variability of wind speed in each point for a number of time windows
+- We execute a MapReduce code to process the data in the output file in HDFS from Step 2
+- Convert the large windspeed variability file on HDFS to get the average of the variability for all the windows.
+
+**Step 3: Visualization (automated_gif.py, heatmap_for_gif.py)**
+
 - Generate a heat map with the average wind speed variability for each coordinate (x,y)

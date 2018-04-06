@@ -30,7 +30,9 @@ the wind speed is 0.
 - Store the variability of wind speed (i.e., MAX – MIN) for each coordinate, for each
 window in HDFS in a large file
 
-**Step 2: Batch processing (batch_processing.py)**
+**Step 2: Combine multiple larger files in HDFS based on 15-20 window lengths (Commad Line syntax)**
+
+**Step 3: Batch processing (batch_processing.py)**
 
 - We execute a MapReduce code to process the data in the output file in HDFS from Step 2
 - Convert the large windspeed variability file on HDFS to get the average of the variability for all the windows.
